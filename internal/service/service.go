@@ -231,3 +231,33 @@ func (s *Service) GetAccountById(userID, id string) (models.Account, error) {
 
 	return account, nil
 }
+
+func (s *Service) UpdateAccount(account *models.Account) error {
+	err := s.Repository.UpdateAccount(account)
+	if err != nil {
+		logger.Error.Println(err)
+		return err
+	}
+
+	return nil
+}
+
+func (s *Service) CreateTransaction(tr *models.Transaction) error {
+	err := s.Repository.CreateTransaction(tr)
+	if err != nil {
+		logger.Error.Println(err)
+		return err
+	}
+
+	return nil
+}
+
+func (s *Service) GetTransactions(accountID string) ([]models.Transaction, error) {
+	tr, err := s.Repository.GetTransactions(accountID)
+	if err != nil {
+		logger.Error.Println(err)
+		return nil, err
+	}
+
+	return tr, nil
+}

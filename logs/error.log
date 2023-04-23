@@ -1,6 +1,1 @@
-2023/04/22 14:31:27.556039 crypto/bcrypt: hashedSecret too short to be a bcrypted password
-2023/04/22 14:31:27.556173 crypto/bcrypt: hashedSecret too short to be a bcrypted password
-2023/04/22 15:03:16.577588 listen tcp 127.0.0.1:8080: bind: address already in use
-2023/04/22 15:05:54.977882 signature is invalid
-2023/04/22 15:05:54.977965 signature is invalid
-2023/04/22 15:05:54.977979 signature is invalid
+

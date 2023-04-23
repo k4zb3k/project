@@ -72,7 +72,7 @@ func (r *Repository) ExistsAccount(number string) (bool, error) {
 }
 
 func (r *Repository) CreateAccount(account *models.Account) error {
-	err := r.Connection.Omit("created", "updated", "deleted").Create(&account).Error
+	err := r.Connection.Omit("created_at", "updated_at", "deleted_at").Create(&account).Error
 	if err != nil {
 		logger.Error.Println(err)
 		return err
@@ -99,4 +99,34 @@ func (r *Repository) GetAccountById(userID, id string) (account models.Account, 
 	}
 
 	return account, nil
+}
+
+func (r *Repository) UpdateAccount(account *models.Account) error {
+	err := r.Connection.Save(account).Error
+	if err != nil {
+		logger.Error.Println(err)
+		return err
+	}
+
+	return nil
+}
+
+func (r *Repository) CreateTransaction(tr *models.Transaction) error {
+	err := r.Connection.Omit("created_at", "updated_at", "deleted_at").Create(&tr).Error
+	if err != nil {
+		logger.Error.Println(err)
+		return err
+	}
+
+	return nil
+}
+
+func (r *Repository) GetTransactions(accountID string) (tr []models.Transaction, err error) {
+	err = r.Connection.Where("account_id = ?", accountID).Find(&tr).Error
+	if err != nil {
+		logger.Error.Println(err)
+		return nil, err
+	}
+
+	return tr, nil
 }
