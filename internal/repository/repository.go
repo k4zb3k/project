@@ -6,6 +6,7 @@ import (
 	"github.com/k4zb3k/project/internal/models"
 	"github.com/k4zb3k/project/pkg/logger"
 	"gorm.io/gorm"
+	"time"
 )
 
 type Repository struct {
@@ -129,4 +130,68 @@ func (r *Repository) GetTransactions(accountID string) (tr []models.Transaction,
 	}
 
 	return tr, nil
+}
+
+func (r *Repository) GetTransactionById(id string) (tr models.Transaction, err error) {
+	err = r.Connection.Where("id = ?", id).Find(&tr).Error
+	if err != nil {
+		logger.Error.Println(err)
+		return models.Transaction{}, err
+	}
+
+	return tr, err
+}
+
+func (r *Repository) GetAccountInfoById(accountID string) (acc *models.Account, err error) {
+	err = r.Connection.Where("id = ?", accountID).Find(&acc).Error
+	if err != nil {
+		logger.Error.Println(err)
+		return nil, err
+	}
+
+	return acc, nil
+}
+
+func (r *Repository) GetReports(report *models.Report) (tr []models.Transaction, err error) {
+	query := r.Connection
+	if report.Type != "" {
+		query = query.Where("type = ?", report.Type)
+	}
+	if report.From != (time.Time{}) {
+		query = query.Where("created_at >= ?", report.From)
+	}
+	if report.To != (time.Time{}) {
+		query = query.Where("created_at <= ?", report.To)
+	}
+
+	page := 1
+	limit := 0
+
+	if report.Page > 0 {
+		page = report.Page
+	}
+	if report.Limit > 0 {
+		limit = report.Limit
+	}
+	if report.Page > 0 {
+		query = query.Limit(limit).Offset((page - 1) * limit)
+	}
+
+	err = query.Find(&tr).Error
+	if err != nil {
+		logger.Error.Println(err)
+		return nil, err
+	}
+
+	return tr, nil
+}
+
+func (r *Repository) GetUserInfoById(userID string) (u *models.User, err error) {
+	err = r.Connection.Where("id = ?", userID).Find(&u).Error
+	if err != nil {
+		logger.Error.Println(err)
+		return nil, err
+	}
+
+	return u, nil
 }

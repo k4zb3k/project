@@ -1,11 +1,13 @@
 package handler
 
 import (
+	"bytes"
 	"github.com/gin-gonic/gin"
 	"github.com/k4zb3k/project/internal/apperror"
 	"github.com/k4zb3k/project/internal/models"
 	"github.com/k4zb3k/project/internal/service"
 	"github.com/k4zb3k/project/pkg/logger"
+	"time"
 )
 
 type Handler struct {
@@ -37,9 +39,11 @@ func (h *Handler) InitRoutes() {
 		api.POST("/account", h.CreateAccount)
 		api.GET("/account", h.GetAccounts)
 		api.GET("/account/:id", h.GetAccountById)
-		api.PUT("/account", h.UpdateAccount) // todo
+		api.PUT("/account", h.UpdateAccount) // todo // do not know what to do
 		api.POST("/transaction", h.CreateTransaction)
-		api.GET("/transaction", h.GetTransactions) // todo
+		api.GET("/transaction", h.GetTransactions)
+		api.GET("/transaction/:id", h.GetTransactionById)
+		api.POST("/reports", h.GetReports)
 	}
 }
 
@@ -319,4 +323,104 @@ func (h *Handler) GetTransactions(c *gin.Context) {
 
 		tr = append(tr, transactions...)
 	}
+
+	c.JSON(200, tr)
+}
+
+func (h *Handler) GetTransactionById(c *gin.Context) {
+	id := c.Param("id")
+
+	userId, ok := c.Get("user_id")
+	if !ok {
+		logger.Error.Println("can not get user ID from token")
+		c.AbortWithStatus(500)
+		return
+	}
+
+	transaction, err := h.Service.GetTransactionById(id)
+	if err != nil {
+		logger.Error.Println(err)
+		c.JSON(500, apperror.ErrInternalServer)
+		return
+	}
+
+	account, err := h.Service.GetAccountInfoById(transaction.AccountID)
+	if err != nil {
+		logger.Error.Println(err)
+		c.JSON(500, apperror.ErrInternalServer)
+		return
+	}
+	if account.UserID != userId {
+		logger.Error.Println("this transaction does not belong to user")
+		c.JSON(500, apperror.ErrInternalServer)
+		return
+	}
+
+	c.JSON(200, transaction)
+}
+
+func (h *Handler) GetReports(c *gin.Context) {
+	var report *models.Report
+
+	userId, ok := c.Get("user_id")
+	if !ok {
+		logger.Error.Println("can not get user ID from token")
+		c.AbortWithStatus(500)
+		return
+	}
+	userID := userId.(string)
+
+	err := c.ShouldBindJSON(&report)
+	if err != nil {
+		logger.Error.Println(err)
+		c.JSON(500, apperror.ErrInternalServer)
+		return
+	}
+	if report.Type != "" && report.Type != "expense" && report.Type != "income" {
+		logger.Error.Println("incorrect transaction type")
+		c.JSON(400, apperror.ErrBadRequest)
+		return
+	}
+
+	from := time.Time{}
+	to := time.Time{}
+	if report.DateFrom != "" {
+		from, err = time.Parse("02-01-2006", report.DateFrom)
+		if err != nil {
+			logger.Error.Println(err)
+			c.JSON(400, apperror.ErrBadRequest)
+			return
+		}
+	}
+	if report.DateFrom != "" {
+		to, err = time.Parse("02-01-2006", report.DateTo)
+		if err != nil {
+			logger.Error.Println(err)
+			c.JSON(400, apperror.ErrBadRequest)
+			return
+		}
+	}
+
+	report.From = from
+	report.To = to
+
+	reports, err := h.Service.GetReports(userID, report)
+	if err != nil {
+		logger.Error.Println(err)
+		c.JSON(500, apperror.ErrInternalServer)
+		return
+	}
+
+	// сохраняем файл в буффер
+	buffer := new(bytes.Buffer)
+	err = reports.Write(buffer)
+	if err != nil {
+		logger.Error.Println(err)
+		c.AbortWithStatus(500)
+		return
+	}
+
+	// Отправляем файл клиенту
+	c.Header("Content-Disposition", "attachment; filename=example.xlsx")
+	c.Data(200, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", buffer.Bytes())
 }

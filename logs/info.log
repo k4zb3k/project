@@ -1,17 +1,5 @@
-13:38:06.684602 read application configuration
-13:38:06.685084 &{0xc0001130ae {port 127.0.0.1 9999} {localhost 5432 tracker_db tracker pass disable} {localhost 6379 } {nats://localhost:4222} { }}
-[GIN-debug] POST   /v1/auth/create           --> github.com/k4zb3k/project/internal/handler.(*Handler).CreateUser-fm (3 handlers)
-[GIN-debug] POST   /v1/auth/login            --> github.com/k4zb3k/project/internal/handler.(*Handler).Login-fm (3 handlers)
-[GIN-debug] POST   /v1/api/account           --> github.com/k4zb3k/project/internal/handler.(*Handler).CreateAccount-fm (4 handlers)
-[GIN-debug] GET    /v1/api/account           --> github.com/k4zb3k/project/internal/handler.(*Handler).GetAccounts-fm (4 handlers)
-[GIN-debug] GET    /v1/api/account/:id       --> github.com/k4zb3k/project/internal/handler.(*Handler).GetAccountById-fm (4 handlers)
-[GIN-debug] PUT    /v1/api/account           --> github.com/k4zb3k/project/internal/handler.(*Handler).UpdateAccount-fm (4 handlers)
-[GIN-debug] POST   /v1/api/transaction       --> github.com/k4zb3k/project/internal/handler.(*Handler).CreateTransaction-fm (4 handlers)
-[GIN-debug] [WARNING] You trusted all proxies, this is NOT safe. We recommend you to set a value.
-Please check https://pkg.go.dev/github.com/gin-gonic/gin#readme-don-t-trust-all-proxies for details.
-[GIN-debug] Listening and serving HTTP on 127.0.0.1:9999
-15:04:18.136997 read application configuration
-15:04:18.137705 &{0xc00010e96e {port 127.0.0.1 9999} {localhost 5432 tracker_db tracker pass disable} {localhost 6379 } {nats://localhost:4222} { }}
+19:00:52.911783 read application configuration
+19:00:52.913044 &{0xc0004801ce {port 127.0.0.1 9999} {localhost 5432 tracker_db tracker pass disable} {localhost 6379 } {nats://localhost:4222} { }}
 [GIN-debug] POST   /v1/auth/create           --> github.com/k4zb3k/project/internal/handler.(*Handler).CreateUser-fm (3 handlers)
 [GIN-debug] POST   /v1/auth/login            --> github.com/k4zb3k/project/internal/handler.(*Handler).Login-fm (3 handlers)
 [GIN-debug] POST   /v1/api/account           --> github.com/k4zb3k/project/internal/handler.(*Handler).CreateAccount-fm (4 handlers)
@@ -20,6 +8,96 @@ Please check https://pkg.go.dev/github.com/gin-gonic/gin#readme-don-t-trust-all-
 [GIN-debug] PUT    /v1/api/account           --> github.com/k4zb3k/project/internal/handler.(*Handler).UpdateAccount-fm (4 handlers)
 [GIN-debug] POST   /v1/api/transaction       --> github.com/k4zb3k/project/internal/handler.(*Handler).CreateTransaction-fm (4 handlers)
 [GIN-debug] GET    /v1/api/transaction       --> github.com/k4zb3k/project/internal/handler.(*Handler).GetTransactions-fm (4 handlers)
+[GIN-debug] GET    /v1/api/transaction/:id   --> github.com/k4zb3k/project/internal/handler.(*Handler).GetTransactionById-fm (4 handlers)
+[GIN-debug] [WARNING] You trusted all proxies, this is NOT safe. We recommend you to set a value.
+Please check https://pkg.go.dev/github.com/gin-gonic/gin#readme-don-t-trust-all-proxies for details.
+[GIN-debug] Listening and serving HTTP on 127.0.0.1:9999
+19:01:52.063503 read application configuration
+19:01:52.064008 &{0xc00010fdfe {port 127.0.0.1 9999} {localhost 5432 tracker_db tracker pass disable} {localhost 6379 } {nats://localhost:4222} { }}
+[GIN-debug] POST   /v1/auth/create           --> github.com/k4zb3k/project/internal/handler.(*Handler).CreateUser-fm (3 handlers)
+[GIN-debug] POST   /v1/auth/login            --> github.com/k4zb3k/project/internal/handler.(*Handler).Login-fm (3 handlers)
+[GIN-debug] POST   /v1/api/account           --> github.com/k4zb3k/project/internal/handler.(*Handler).CreateAccount-fm (4 handlers)
+[GIN-debug] GET    /v1/api/account           --> github.com/k4zb3k/project/internal/handler.(*Handler).GetAccounts-fm (4 handlers)
+[GIN-debug] GET    /v1/api/account/:id       --> github.com/k4zb3k/project/internal/handler.(*Handler).GetAccountById-fm (4 handlers)
+[GIN-debug] PUT    /v1/api/account           --> github.com/k4zb3k/project/internal/handler.(*Handler).UpdateAccount-fm (4 handlers)
+[GIN-debug] POST   /v1/api/transaction       --> github.com/k4zb3k/project/internal/handler.(*Handler).CreateTransaction-fm (4 handlers)
+[GIN-debug] GET    /v1/api/transaction       --> github.com/k4zb3k/project/internal/handler.(*Handler).GetTransactions-fm (4 handlers)
+[GIN-debug] GET    /v1/api/transaction/:id   --> github.com/k4zb3k/project/internal/handler.(*Handler).GetTransactionById-fm (4 handlers)
+[GIN-debug] [WARNING] You trusted all proxies, this is NOT safe. We recommend you to set a value.
+Please check https://pkg.go.dev/github.com/gin-gonic/gin#readme-don-t-trust-all-proxies for details.
+[GIN-debug] Listening and serving HTTP on 127.0.0.1:9999
+17:50:48.568982 read application configuration
+17:50:48.569568 &{0xc00003a51e {port 127.0.0.1 9999} {localhost 5432 tracker_db tracker pass disable} {localhost 6379 } {nats://localhost:4222} { }}
+[GIN-debug] POST   /v1/auth/create           --> github.com/k4zb3k/project/internal/handler.(*Handler).CreateUser-fm (3 handlers)
+[GIN-debug] POST   /v1/auth/login            --> github.com/k4zb3k/project/internal/handler.(*Handler).Login-fm (3 handlers)
+[GIN-debug] POST   /v1/api/account           --> github.com/k4zb3k/project/internal/handler.(*Handler).CreateAccount-fm (4 handlers)
+[GIN-debug] GET    /v1/api/account           --> github.com/k4zb3k/project/internal/handler.(*Handler).GetAccounts-fm (4 handlers)
+[GIN-debug] GET    /v1/api/account/:id       --> github.com/k4zb3k/project/internal/handler.(*Handler).GetAccountById-fm (4 handlers)
+[GIN-debug] PUT    /v1/api/account           --> github.com/k4zb3k/project/internal/handler.(*Handler).UpdateAccount-fm (4 handlers)
+[GIN-debug] POST   /v1/api/transaction       --> github.com/k4zb3k/project/internal/handler.(*Handler).CreateTransaction-fm (4 handlers)
+[GIN-debug] GET    /v1/api/transaction       --> github.com/k4zb3k/project/internal/handler.(*Handler).GetTransactions-fm (4 handlers)
+[GIN-debug] GET    /v1/api/transaction/:id   --> github.com/k4zb3k/project/internal/handler.(*Handler).GetTransactionById-fm (4 handlers)
+[GIN-debug] GET    /v1/api/reports           --> github.com/k4zb3k/project/internal/handler.(*Handler).GetReports-fm (4 handlers)
+[GIN-debug] [WARNING] You trusted all proxies, this is NOT safe. We recommend you to set a value.
+Please check https://pkg.go.dev/github.com/gin-gonic/gin#readme-don-t-trust-all-proxies for details.
+[GIN-debug] Listening and serving HTTP on 127.0.0.1:9999
+18:18:03.535237 read application configuration
+18:18:03.535797 &{0xc000481c7e {port 127.0.0.1 9999} {localhost 5432 tracker_db tracker pass disable} {localhost 6379 } {nats://localhost:4222} { }}
+[GIN-debug] POST   /v1/auth/create           --> github.com/k4zb3k/project/internal/handler.(*Handler).CreateUser-fm (3 handlers)
+[GIN-debug] POST   /v1/auth/login            --> github.com/k4zb3k/project/internal/handler.(*Handler).Login-fm (3 handlers)
+[GIN-debug] POST   /v1/api/account           --> github.com/k4zb3k/project/internal/handler.(*Handler).CreateAccount-fm (4 handlers)
+[GIN-debug] GET    /v1/api/account           --> github.com/k4zb3k/project/internal/handler.(*Handler).GetAccounts-fm (4 handlers)
+[GIN-debug] GET    /v1/api/account/:id       --> github.com/k4zb3k/project/internal/handler.(*Handler).GetAccountById-fm (4 handlers)
+[GIN-debug] PUT    /v1/api/account           --> github.com/k4zb3k/project/internal/handler.(*Handler).UpdateAccount-fm (4 handlers)
+[GIN-debug] POST   /v1/api/transaction       --> github.com/k4zb3k/project/internal/handler.(*Handler).CreateTransaction-fm (4 handlers)
+[GIN-debug] GET    /v1/api/transaction       --> github.com/k4zb3k/project/internal/handler.(*Handler).GetTransactions-fm (4 handlers)
+[GIN-debug] GET    /v1/api/transaction/:id   --> github.com/k4zb3k/project/internal/handler.(*Handler).GetTransactionById-fm (4 handlers)
+[GIN-debug] POST   /v1/api/reports           --> github.com/k4zb3k/project/internal/handler.(*Handler).GetReports-fm (4 handlers)
+[GIN-debug] [WARNING] You trusted all proxies, this is NOT safe. We recommend you to set a value.
+Please check https://pkg.go.dev/github.com/gin-gonic/gin#readme-don-t-trust-all-proxies for details.
+[GIN-debug] Listening and serving HTTP on 127.0.0.1:9999
+18:18:47.434988 read application configuration
+18:18:47.435382 &{0xc00026fd5e {port 127.0.0.1 9999} {localhost 5432 tracker_db tracker pass disable} {localhost 6379 } {nats://localhost:4222} { }}
+[GIN-debug] POST   /v1/auth/create           --> github.com/k4zb3k/project/internal/handler.(*Handler).CreateUser-fm (3 handlers)
+[GIN-debug] POST   /v1/auth/login            --> github.com/k4zb3k/project/internal/handler.(*Handler).Login-fm (3 handlers)
+[GIN-debug] POST   /v1/api/account           --> github.com/k4zb3k/project/internal/handler.(*Handler).CreateAccount-fm (4 handlers)
+[GIN-debug] GET    /v1/api/account           --> github.com/k4zb3k/project/internal/handler.(*Handler).GetAccounts-fm (4 handlers)
+[GIN-debug] GET    /v1/api/account/:id       --> github.com/k4zb3k/project/internal/handler.(*Handler).GetAccountById-fm (4 handlers)
+[GIN-debug] PUT    /v1/api/account           --> github.com/k4zb3k/project/internal/handler.(*Handler).UpdateAccount-fm (4 handlers)
+[GIN-debug] POST   /v1/api/transaction       --> github.com/k4zb3k/project/internal/handler.(*Handler).CreateTransaction-fm (4 handlers)
+[GIN-debug] GET    /v1/api/transaction       --> github.com/k4zb3k/project/internal/handler.(*Handler).GetTransactions-fm (4 handlers)
+[GIN-debug] GET    /v1/api/transaction/:id   --> github.com/k4zb3k/project/internal/handler.(*Handler).GetTransactionById-fm (4 handlers)
+[GIN-debug] POST   /v1/api/reports           --> github.com/k4zb3k/project/internal/handler.(*Handler).GetReports-fm (4 handlers)
+[GIN-debug] [WARNING] You trusted all proxies, this is NOT safe. We recommend you to set a value.
+Please check https://pkg.go.dev/github.com/gin-gonic/gin#readme-don-t-trust-all-proxies for details.
+[GIN-debug] Listening and serving HTTP on 127.0.0.1:9999
+18:18:57.506463 read application configuration
+18:18:57.506781 &{0xc00026fd5e {port 127.0.0.1 9999} {localhost 5432 tracker_db tracker pass disable} {localhost 6379 } {nats://localhost:4222} { }}
+[GIN-debug] POST   /v1/auth/create           --> github.com/k4zb3k/project/internal/handler.(*Handler).CreateUser-fm (3 handlers)
+[GIN-debug] POST   /v1/auth/login            --> github.com/k4zb3k/project/internal/handler.(*Handler).Login-fm (3 handlers)
+[GIN-debug] POST   /v1/api/account           --> github.com/k4zb3k/project/internal/handler.(*Handler).CreateAccount-fm (4 handlers)
+[GIN-debug] GET    /v1/api/account           --> github.com/k4zb3k/project/internal/handler.(*Handler).GetAccounts-fm (4 handlers)
+[GIN-debug] GET    /v1/api/account/:id       --> github.com/k4zb3k/project/internal/handler.(*Handler).GetAccountById-fm (4 handlers)
+[GIN-debug] PUT    /v1/api/account           --> github.com/k4zb3k/project/internal/handler.(*Handler).UpdateAccount-fm (4 handlers)
+[GIN-debug] POST   /v1/api/transaction       --> github.com/k4zb3k/project/internal/handler.(*Handler).CreateTransaction-fm (4 handlers)
+[GIN-debug] GET    /v1/api/transaction       --> github.com/k4zb3k/project/internal/handler.(*Handler).GetTransactions-fm (4 handlers)
+[GIN-debug] GET    /v1/api/transaction/:id   --> github.com/k4zb3k/project/internal/handler.(*Handler).GetTransactionById-fm (4 handlers)
+[GIN-debug] GET    /v1/api/reports           --> github.com/k4zb3k/project/internal/handler.(*Handler).GetReports-fm (4 handlers)
+[GIN-debug] [WARNING] You trusted all proxies, this is NOT safe. We recommend you to set a value.
+Please check https://pkg.go.dev/github.com/gin-gonic/gin#readme-don-t-trust-all-proxies for details.
+[GIN-debug] Listening and serving HTTP on 127.0.0.1:9999
+18:19:24.760252 read application configuration
+18:19:24.760678 &{0xc00003a6be {port 127.0.0.1 9999} {localhost 5432 tracker_db tracker pass disable} {localhost 6379 } {nats://localhost:4222} { }}
+[GIN-debug] POST   /v1/auth/create           --> github.com/k4zb3k/project/internal/handler.(*Handler).CreateUser-fm (3 handlers)
+[GIN-debug] POST   /v1/auth/login            --> github.com/k4zb3k/project/internal/handler.(*Handler).Login-fm (3 handlers)
+[GIN-debug] POST   /v1/api/account           --> github.com/k4zb3k/project/internal/handler.(*Handler).CreateAccount-fm (4 handlers)
+[GIN-debug] GET    /v1/api/account           --> github.com/k4zb3k/project/internal/handler.(*Handler).GetAccounts-fm (4 handlers)
+[GIN-debug] GET    /v1/api/account/:id       --> github.com/k4zb3k/project/internal/handler.(*Handler).GetAccountById-fm (4 handlers)
+[GIN-debug] PUT    /v1/api/account           --> github.com/k4zb3k/project/internal/handler.(*Handler).UpdateAccount-fm (4 handlers)
+[GIN-debug] POST   /v1/api/transaction       --> github.com/k4zb3k/project/internal/handler.(*Handler).CreateTransaction-fm (4 handlers)
+[GIN-debug] GET    /v1/api/transaction       --> github.com/k4zb3k/project/internal/handler.(*Handler).GetTransactions-fm (4 handlers)
+[GIN-debug] GET    /v1/api/transaction/:id   --> github.com/k4zb3k/project/internal/handler.(*Handler).GetTransactionById-fm (4 handlers)
+[GIN-debug] POST   /v1/api/reports           --> github.com/k4zb3k/project/internal/handler.(*Handler).GetReports-fm (4 handlers)
 [GIN-debug] [WARNING] You trusted all proxies, this is NOT safe. We recommend you to set a value.
 Please check https://pkg.go.dev/github.com/gin-gonic/gin#readme-don-t-trust-all-proxies for details.
 [GIN-debug] Listening and serving HTTP on 127.0.0.1:9999

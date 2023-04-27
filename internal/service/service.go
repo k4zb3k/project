@@ -9,8 +9,10 @@ import (
 	"github.com/k4zb3k/project/internal/repository"
 	"github.com/k4zb3k/project/pkg/logger"
 	"github.com/twinj/uuid"
+	"github.com/xuri/excelize/v2"
 	"golang.org/x/crypto/bcrypt"
 	"os"
+	"strconv"
 	"strings"
 	"time"
 )
@@ -261,3 +263,153 @@ func (s *Service) GetTransactions(accountID string) ([]models.Transaction, error
 
 	return tr, nil
 }
+
+func (s *Service) GetTransactionById(id string) (models.Transaction, error) {
+	tr, err := s.Repository.GetTransactionById(id)
+	if err != nil {
+		logger.Error.Println(err)
+		return models.Transaction{}, err
+	}
+
+	return tr, nil
+}
+
+func (s *Service) GetAccountInfoById(accountID string) (*models.Account, error) {
+	account, err := s.Repository.GetAccountInfoById(accountID)
+	if err != nil {
+		logger.Error.Println(err)
+		return nil, err
+	}
+
+	return account, nil
+}
+
+func (s *Service) GetReports(userID string, report *models.Report) (*excelize.File, error) {
+	tr, err := s.Repository.GetReports(report)
+	if err != nil {
+		logger.Error.Println(err)
+		return nil, err
+	}
+
+	excelReports, err := s.GetExcelReports(userID, tr)
+	if err != nil {
+		logger.Error.Println(err)
+		return nil, err
+	}
+
+	return excelReports, nil
+}
+
+func (s *Service) GetExcelReports(userID string, tr []models.Transaction) (*excelize.File, error) {
+	excelFile := excelize.NewFile()
+
+	sheet, err := excelFile.NewSheet("Отчёт")
+	if err != nil {
+		logger.Error.Println(err)
+		return nil, err
+	}
+
+	err = excelFile.SetCellValue("Отчёт", "A1", "Имя пользователя")
+	if err != nil {
+		logger.Error.Println(err)
+		return nil, err
+	}
+
+	err = excelFile.SetCellValue("Отчёт", "B1", "Название счёта")
+	if err != nil {
+		logger.Error.Println(err)
+		return nil, err
+	}
+
+	err = excelFile.SetCellValue("Отчёт", "C1", "Тип операции")
+	if err != nil {
+		logger.Error.Println(err)
+		return nil, err
+	}
+
+	err = excelFile.SetCellValue("Отчёт", "D1", "Сумма")
+	if err != nil {
+		logger.Error.Println(err)
+		return nil, err
+	}
+
+	err = excelFile.SetCellValue("Отчёт", "E1", "Дата совершения операции")
+	if err != nil {
+		logger.Error.Println(err)
+		return nil, err
+	}
+
+	u, err := s.GetUserInfoById(userID)
+	if err != nil {
+		logger.Error.Println(err)
+		return nil, err
+	}
+	for i, transaction := range tr {
+		i += 2
+
+		account, err := s.GetAccountInfoById(transaction.AccountID)
+		if err != nil {
+			logger.Error.Println(err)
+			return nil, err
+		}
+
+		err = excelFile.SetCellValue("Отчёт", "A"+strconv.Itoa(i), u.Username)
+		if err != nil {
+			logger.Error.Println(err)
+			return nil, err
+		}
+
+		err = excelFile.SetCellValue("Отчёт", "B"+strconv.Itoa(i), account.Number)
+		if err != nil {
+			logger.Error.Println(err)
+			return nil, err
+		}
+
+		err = excelFile.SetCellValue("Отчёт", "C"+strconv.Itoa(i), transaction.Type)
+		if err != nil {
+			logger.Error.Println(err)
+			return nil, err
+		}
+
+		err = excelFile.SetCellValue("Отчёт", "D"+strconv.Itoa(i), transaction.Amount)
+		if err != nil {
+			logger.Error.Println(err)
+			return nil, err
+		}
+
+		err = excelFile.SetCellValue("Отчёт", "E"+strconv.Itoa(i), transaction.CreatedAt)
+		if err != nil {
+			logger.Error.Println(err)
+			return nil, err
+		}
+	}
+	excelFile.SetActiveSheet(sheet)
+
+	err = excelFile.SaveAs("report.xlsx")
+	if err != nil {
+		logger.Error.Println(err)
+		return nil, err
+	}
+
+	return excelFile, nil
+}
+
+func (s *Service) GetUserInfoById(userID string) (*models.User, error) {
+	u, err := s.Repository.GetUserInfoById(userID)
+	if err != nil {
+		logger.Error.Println(err)
+		return nil, err
+	}
+
+	return u, nil
+}
+
+//func (s *Service) GetAccountInfoById(accountID string) (*models.Account, error) {
+//	account, err := s.Repository.GetAccountInfoById(accountID)
+//	if err != nil {
+//		logger.Error.Println(err)
+//		return nil, err
+//	}
+//
+//	return account, nil
+//}
