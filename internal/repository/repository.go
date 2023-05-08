@@ -2,6 +2,7 @@ package repository
 
 import (
 	"context"
+	"fmt"
 	"github.com/k4zb3k/project/internal/apperror"
 	"github.com/k4zb3k/project/internal/models"
 	"github.com/k4zb3k/project/pkg/logger"
@@ -154,6 +155,9 @@ func (r *Repository) GetAccountInfoById(accountID string) (acc *models.Account, 
 
 func (r *Repository) GetReports(report *models.Report) (tr []models.Transaction, err error) {
 	query := r.Connection
+
+	fmt.Println(report, "====================================")
+
 	if report.Type != "" {
 		query = query.Where("type = ?", report.Type)
 	}

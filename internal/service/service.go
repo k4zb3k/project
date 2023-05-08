@@ -285,6 +285,8 @@ func (s *Service) GetAccountInfoById(accountID string) (*models.Account, error) 
 }
 
 func (s *Service) GetReports(userID string, report *models.Report) (*excelize.File, error) {
+	var transactions []models.Transaction
+
 	tr, err := s.Repository.GetReports(report)
 	if err != nil {
 		logger.Error.Println(err)
@@ -295,6 +297,23 @@ func (s *Service) GetReports(userID string, report *models.Report) (*excelize.Fi
 	if err != nil {
 		logger.Error.Println(err)
 		return nil, err
+	}
+
+	if report == (&models.Report{}) {
+		accounts, err := s.GetAccounts(userID)
+		if err != nil {
+			logger.Error.Println(err)
+			return nil, err
+		}
+
+		for _, account := range accounts {
+			transaction, err := s.GetTransactions(account.ID)
+			if err != nil {
+				logger.Error.Println(err)
+				return nil, err
+			}
+			transactions = append(transactions, transaction...)
+		}
 	}
 
 	return excelReports, nil
@@ -403,13 +422,3 @@ func (s *Service) GetUserInfoById(userID string) (*models.User, error) {
 
 	return u, nil
 }
-
-//func (s *Service) GetAccountInfoById(accountID string) (*models.Account, error) {
-//	account, err := s.Repository.GetAccountInfoById(accountID)
-//	if err != nil {
-//		logger.Error.Println(err)
-//		return nil, err
-//	}
-//
-//	return account, nil
-//}

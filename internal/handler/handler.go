@@ -2,6 +2,7 @@ package handler
 
 import (
 	"bytes"
+	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/k4zb3k/project/internal/apperror"
 	"github.com/k4zb3k/project/internal/models"
@@ -242,7 +243,7 @@ func (h *Handler) CreateTransaction(c *gin.Context) {
 	userId, ok := c.Get("user_id")
 	if !ok {
 		logger.Error.Println("can not get user ID from token")
-		c.AbortWithStatus(500) //todo
+		c.AbortWithStatus(500)
 		return
 	}
 	userID := userId.(string)
@@ -279,7 +280,7 @@ func (h *Handler) CreateTransaction(c *gin.Context) {
 		return
 	}
 
-	if tr.Type == "expense" { // todo
+	if tr.Type == "expense" {
 		account.Balance -= tr.Amount
 	} else if tr.Type == "income" {
 		account.Balance += tr.Amount
@@ -360,7 +361,9 @@ func (h *Handler) GetTransactionById(c *gin.Context) {
 }
 
 func (h *Handler) GetReports(c *gin.Context) {
-	var report *models.Report
+	var (
+		report *models.Report
+	)
 
 	userId, ok := c.Get("user_id")
 	if !ok {
@@ -381,6 +384,23 @@ func (h *Handler) GetReports(c *gin.Context) {
 		c.JSON(400, apperror.ErrBadRequest)
 		return
 	}
+
+	//if report == (&models.Report{}) {
+	//	accounts, err := h.Service.GetAccounts(userID)
+	//	if err != nil {
+	//		logger.Error.Println(err)
+	//		c.JSON(500, apperror.ErrInternalServer)
+	//	}
+	//
+	//	for _, account := range accounts {
+	//		transaction, err := h.Service.GetTransactions(account.ID)
+	//		if err != nil {
+	//			logger.Error.Println(err)
+	//			c.JSON(500, apperror.ErrInternalServer)
+	//		}
+	//		transactions = append(transactions, transaction...)
+	//	}
+	//}
 
 	from := time.Time{}
 	to := time.Time{}
@@ -403,6 +423,8 @@ func (h *Handler) GetReports(c *gin.Context) {
 
 	report.From = from
 	report.To = to
+
+	fmt.Println(report)
 
 	reports, err := h.Service.GetReports(userID, report)
 	if err != nil {
